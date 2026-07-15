@@ -1,0 +1,58 @@
+def grade(marks):
+    if marks >=90:
+        return "A"
+    elif marks >= 75:
+        return "B"
+    elif marks >=60:
+        return "C"
+    elif marks >=40:
+        return "D"
+    else :
+        return "F"
+
+
+def students_analysis(students):
+    marks=[s["marks"]for s in students]
+    average= sum(marks)/len(marks)
+
+
+    Top_student=max(students , key= lambda s:  s["marks"])
+    Last_student=min(students , key= lambda s:  s["marks"])
+
+
+    for s in students:
+        s["grade"]=grade(s["marks"])
+    
+    return{
+        "average": average,
+        "Top_student":Top_student,
+        "Last_student":Last_student 
+       }
+    
+def report(students, summary):
+    print("student report")
+    print("-"*30)
+    for s in students:
+        print(f"{s['name']:<10} marks:{s['marks']:<5} grade: {s["grade"]}")
+    print("-"*30)
+    print(f"class average:{summary['average']:.2f}")
+    print(f"Top_student:{summary['Top_student']['name']}({summary['Top_student']['marks']})") 
+    print(f"Last_student:{summary['Last_student']['name']}({summary['Last_student']['marks']})")   
+
+
+if __name__=="__main__":
+    students =[
+        {'name':"BEN TENNISON","marks":94},
+        {'name':"OGGY","marks":51},
+        {'name':"JACK","marks":54},
+        {'name':"NOBITA","marks":63},
+        {'name':"GIAN","marks":78},
+        {'name':"SHIZUKA","marks":24},
+        {'name':"KITRETSU","marks":67},
+        {'name':"DORAEMON","marks":55},
+        {'name':"PERMAN","marks":84},
+    ]
+    
+summary=students_analysis(students)
+report(students,summary)
+        
